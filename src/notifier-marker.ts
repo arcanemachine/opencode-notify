@@ -17,7 +17,7 @@ import * as path from "node:path"
 import type { Plugin } from "@opencode-ai/plugin"
 import type { Event } from "@opencode-ai/sdk"
 
-const MARKER_DIR = "/workspace/tmp/notifier-marker-files"
+const MARKER_DIR = process.env.MARKER_DIR || "/workspace/tmp/opencode-notify-marker-files"
 
 interface MarkerConfig {
 	/** Create markers for child/sub-session events (default: false) */
