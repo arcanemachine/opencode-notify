@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ocx.kdco.dev/schema/registry.json",
+  "name": "kdco-notifier-marker",
+  "description": "Marker file plugin for OpenCode - create files when events occur",
+  "components": [
+    {
+      "name": "kdco-notifier-marker",
+      "description": "Creates marker files in /workspace/tmp/notifier/ for session events",
+      "type": "ocx:plugin",
+      "npmDependencies": [],
+      "files": [
+        {
+          "path": "src/notifier.ts",
+          "target": "plugin/notifier.ts"
+        }
+      ]
+    }
+  ]
+}
