@@ -39,6 +39,14 @@ Clone this repo and copy its `src/` into your Opencode config directory: `.openc
 
 For example: `cp -r /path/to/this/repo/src /path/to/.opencode/plugin`
 
+Then add `"opencode-notify-marker"` to the `plugin` array in your `~/.opencode/opencode.json`:
+
+```json
+{
+  "plugin": ["opencode-notify-marker"]
+}
+```
+
 ## Usage
 
 If you're running OpenCode in a container but want desktop notifications on your host machine:

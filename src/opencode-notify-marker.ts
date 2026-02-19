@@ -33,7 +33,7 @@ async function loadConfig(): Promise<MarkerConfig> {
 		typeof process.env.HOME !== "undefined" ? process.env.HOME : "/root",
 		".config",
 		"opencode",
-		"kdco-notifier-marker.json",
+		"opencode-notify-marker.json",
 	)
 
 	try {

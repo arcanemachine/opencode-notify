@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Customize marker directory with MARKER_DIR environment variable
+# Customize marker directory with WATCH_DIR environment variable
 WATCH_DIR="${WATCH_DIR:-../../tmp/opencode-notify-marker-files}"
 
 # Ensure directory exists
@@ -30,7 +30,7 @@ remove_existing_markers
 if command -v inotifywait &> /dev/null; then
     echo "Using inotifywait to watch files."
     inotifywait -m -e create --format '%f' "$WATCH_DIR" | while read -r file; do
-        notify-send "OpenCode event" "$file"
+        notify-send -t 15000 "OpenCode event handler" "\nSent event: $file\n\nTimestamp: $(date --iso-8601=seconds)"
         rm "$WATCH_DIR/$file"
     done
 else
@@ -40,7 +40,7 @@ else
         for file in "$WATCH_DIR"/*; do
             if [ -f "$file" ]; then
                 filename=$(basename "$file")
-                notify-send "OpenCode" "$filename"
+                notify-send -t 15000 "OpenCode" "\nSent event: $filename\n\nTimestamp: $(date --iso-8601=seconds)"
                 rm "$file"
             fi
         done
