@@ -2,7 +2,7 @@
 
 > Marker file plugin for OpenCode - create files when events occur.
 
-A plugin for [OpenCode](https://github.com/sst/opencode) that creates marker files in `/workspace/tmp/notifier/` when specific events occur. Useful for external monitoring scripts to detect when the AI needs attention.
+A plugin for [OpenCode](https://github.com/sst/opencode) that creates marker files in `/workspace/tmp/notifier-marker-files/` when specific events occur. Useful for external monitoring scripts to detect when the AI needs attention.
 
 **Note:** This project is a fork of [kdco-notify](https://github.com/kdcokenny/opencode-notify) by kdcokenny, repurposed to create marker files instead of desktop notifications.
 
@@ -11,7 +11,7 @@ A plugin for [OpenCode](https://github.com/sst/opencode) that creates marker fil
 You want to monitor OpenCode sessions from external tools (shell scripts, monitoring dashboards, etc.) but don't want to poll the API. This plugin solves that:
 
 - **Event-driven** - External tools watch the marker files instead of polling
-- **Simple** - Just check if a file exists in `/workspace/tmp/notifier/`
+- **Simple** - Just check if a file exists in `/workspace/tmp/notifier-marker-files/`
 - **Lightweight** - No API calls, no network requests, just file system operations
 
 ## Installation
@@ -43,7 +43,7 @@ ocx add kdco/workspace
 | Question asked | `TOOL_EXECUTE_BEFORE` | AI needs your input |
 
 The plugin automatically:
-1. Creates marker files in `/workspace/tmp/notifier/`
+1. Creates marker files in `/workspace/tmp/notifier-marker-files/`
 2. Only creates markers for parent sessions (not every sub-task)
 3. Overwrites existing markers with new timestamps
 
@@ -65,16 +65,16 @@ Works out of the box. To customize, create `~/.config/opencode/kdco-notifier-mar
 #!/bin/bash
 
 while true; do
-  if [ -f "/workspace/tmp/notifier/SESSION_IDLE" ]; then
+  if [ -f "/workspace/tmp/notifier-marker-files/SESSION_IDLE" ]; then
     echo "Session complete! Checking output..."
     # Your logic here
-    rm "/workspace/tmp/notifier/SESSION_IDLE"
+    rm "/workspace/tmp/notifier-marker-files/SESSION_IDLE"
   fi
   
-  if [ -f "/workspace/tmp/notifier/SESSION_ERROR" ]; then
+  if [ -f "/workspace/tmp/notifier-marker-files/SESSION_ERROR" ]; then
     echo "Session error detected!"
     # Your logic here
-    rm "/workspace/tmp/notifier/SESSION_ERROR"
+    rm "/workspace/tmp/notifier-marker-files/SESSION_ERROR"
   fi
   
   sleep 5
@@ -88,7 +88,7 @@ import os
 import time
 from pathlib import Path
 
-MARKER_DIR = Path("/workspace/tmp/notifier")
+MARKER_DIR = Path("/workspace/tmp/notifier-marker-files")
 
 while True:
     for marker in ["SESSION_IDLE", "SESSION_ERROR", "PERMISSION_UPDATED"]:
